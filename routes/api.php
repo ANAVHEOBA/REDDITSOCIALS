@@ -10,6 +10,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\PostController;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -65,4 +66,22 @@ Route::middleware("auth:sanctum")->group(function () {
 Route::middleware(['web'])->group(function () {
     Route::get('/auth/reddit/redirect', [OAuthController::class, 'redirectToReddit']);
     Route::get('/auth/reddit/callback', [OAuthController::class, 'handleRedditCallback']);
+});
+
+
+// Slack OAuth Routes
+//Route::get('/auth/slack/redirect', [OAuthController::class, 'redirectToSlack']);
+//Route::get('/auth/slack/callback', [OAuthController::class, 'handleSlackCallback'])
+ //    ->name('slack.callback');
+
+
+Route::post('/slack/post', [PostController::class, 'postMessageToSlack'])->name('slack.postMessage');
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('slack')->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('slack')->user();
+    
 });

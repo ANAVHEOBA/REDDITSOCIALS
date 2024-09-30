@@ -19,6 +19,8 @@ class AddRedditFieldsToUsersTable extends Migration
             $table->string('reddit_id')->nullable()->unique();
             $table->string('reddit_token')->nullable();
             $table->string('reddit_refresh_token')->nullable();
+            $table->string('slack_id')->nullable();
+            $table->string('slack_access_token')->nullable();
         });
     }
 

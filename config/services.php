@@ -37,4 +37,10 @@ return [
         'redirect' => env('REDDIT_REDIRECT_URI'),
     ],
 
+
+    'slack' => [
+    'client_id' => env('SLACK_CLIENT_ID', 'your-client-id'),
+    'client_secret' => env('SLACK_CLIENT_SECRET', 'your-client-secret'),
+    'redirect_uri' => env('SLACK_REDIRECT_URI', 'your-redirect-uri'),
+    ],
 ];
